@@ -7,10 +7,8 @@ var glHangmandCount = 0;
 var glScore = 0;
 
 document.onkeyup = function(event) {
-	console.log("glPressStartKey: "+ glPressStartKey);
 	if (!glPressStartKey) {
 		init();
-		console.log("4. Fist Key Pressing");
 	} 	
 	else {
 		if (isletterinWord(event.key,glHangmanWord) !== -1) {
@@ -28,15 +26,12 @@ document.onkeyup = function(event) {
 		        }
 		        else {
 		        	document.getElementById("underlines").innerHTML = glHangmanWordAndUnderlines.join(" ");
-		        	console.log("glHangmanWordAndUnderlines: "+glHangmanWordAndUnderlines);
-		        	console.log("glHangmanWordAndUnderlines.indexOf underline: "+ glHangmanWordAndUnderlines.indexOf("_ "));
 		        }
 		    }
 		    else {
 		    	if(writeLetterFootBox(event.key)) {
 		    		if (glHangmandCount < 7) {
 		    			hangmanPicChange();
-		    			console.log("hangmanPicChange: executing");	
 		    		}
 		    		else {
 		    			glPressStartKey = false;
@@ -48,14 +43,11 @@ document.onkeyup = function(event) {
 	}
 }
 function init() {
-	console.log("1. INIT");
 	glHangmanWord = glBestVideogamesOfAllTime[Math.floor(Math.random() * glBestVideogamesOfAllTime.length)];
 	glHangmanWordAndUnderlines = [];
 	glFootBoxArray = [];
 	glHangmandCount = 0;
 	glPressStartKey = true;
-	console.log("glHangmanWord: "+glHangmanWord);
-	console.log("2. First Screen");
 	document.getElementById("hangman-col").innerHTML = '<div id="hangman-card" class="card lg-mx-auto text-center lg-mt-5 bg-secondary pb-2">' +
 			'<img id="hangman-image" class="card-img-top w-25 mx-auto" src="assets/images/hangman1.png" alt="Card image cap">' +
             '<div class="card-body">' +
@@ -72,14 +64,9 @@ function init() {
 }
 
 function isletterinWord(letter, word) {
-	console.log("5. Word Searching");
-	console.log("isletterinWord letter: "+letter);
-	console.log("isletterinWord word: "+word);
-	console.log("isletterinWord word.length: "+word.length);
 	position = -1;
 	for (var i = 0; i < word.length; i++) {
 		if (word.charAt(i) == letter) {
-			console.log("isletterinWord charAt: "+word.charAt(i)+ " "+i);
 			glHangmanWordAndUnderlines.splice(i, 1, letter);
 			position = i;	
 		}
@@ -96,10 +83,8 @@ function winCondition() {
 }
 
 function writeLetterFootBox(letter) {
-	console.log("5. Writing Footbox")
 	if (glFootBoxArray.indexOf(letter) === -1) {
 		glFootBoxArray.push(letter);
-		console.log("glFootBoxArray: "+ glFootBoxArray);
 		document.getElementById("letters").innerHTML = glFootBoxArray.join(" ");
 		return true;
 	}
@@ -107,12 +92,8 @@ function writeLetterFootBox(letter) {
 }
 
 function hangmanPicChange(){
-	console.log("6. hangmanPicChange");
-	console.log("glHangmandCount before: "+glHangmandCount);
 	glHangmandCount++;
-	console.log("glHangmandCount after: "+glHangmandCount);
 	if (glHangmandCount == 1) {
-		console.log("Hangman Picture 1");
 		document.getElementById("hangman-image").src = "assets/images/hangman2.png";
 	}
 	if (glHangmandCount === 2) {
